@@ -2,6 +2,8 @@
 
 A reverse shell over HTTP (dodges deep packet inspection). Using Python 3 and no external dependencies needed.
 
+This fork added proxy awareness that I needed. 
+
 # Prerequisites
 - Python 3 (on both the attacker and the target machine)
 
