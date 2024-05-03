@@ -12,7 +12,6 @@ ATTACKER_PORT = 443
 
 class MyHandler(BaseHTTPRequestHandler):
 
-    # Don't print: 127.0.0.1 - - [22/Jun/2021 21:29:43] "POST / HTTP/1.1" 200
     def log_message(self, format, *args):
         pass
 

